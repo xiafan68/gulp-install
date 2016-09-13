@@ -53,8 +53,12 @@ module.exports = exports = function install(opts) {
         if (cmd.cmd === 'npm' && opts && opts.noOptional) {
           cmd.args.push('--no-optional');
         }
-
-        cmd.cwd = path.dirname(file.path);
+	  
+	  if (opts&&opts.cwd)
+	      cmd.cwd=opts.cwd;
+	  else	  
+              cmd.cwd = path.dirname(file.path);
+	  
         toRun.push(cmd);
       }
       this.push(file);
